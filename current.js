@@ -131,42 +131,6 @@ function searchInsertionPosition2(arry, wanted){
     }
 }
 
-function quickSort(lis){
-    if(lis.length <= 2){
-        return lis
-    }else{
-        let pivot = lis[0]
-        let left = function(){
-            let result = []
-            for(let i = 0; i < lis.length;i++ ){
-              if(i === 0 ){
-                    continue
-                }
-                if(lis[i] <= pivot ){
-                    result.push(lis[i])
-                }
-    
-            }
-            return result
-        } 
-        let right = function(){
-            let result = []
-            for(let i = 0; i < lis.length; i++){
-                if(i === 0){
-                    continue
-                }
-                if(lis[i] > pivot){
-                    result.push(lis[i])
-                }
-            }
-            return result
-        }
-        
-        return quickSort(left())
-    }
-
-}
-
 function validParientes(str){
     const allChar = str.split("")
     const parenthesis = {
@@ -194,18 +158,18 @@ function validParientes(str){
         open:undefined,
         close:undefined,
     }
-
+    
     for(let i = 0; i < allChar.length; i ++){
         if((allChar[i] ===  parenthesis.open || allChar[i] === parenthesis.close)){
             if(allChar[i] === parenthesis.open){
                 foundParientes.open = i}
-            if(allChar[i] === parenthesis.close){
+                if(allChar[i] === parenthesis.close){
                 foundParientes.close = i
         }
                 }
         if((allChar[i] ===  square.open || allChar[i] === square.close)){
-                    if(allChar[i] === square.open){
-                        foundSquare.open = i
+            if(allChar[i] === square.open){
+                foundSquare.open = i
                     }
                     if(allChar[i] === square.close){
                         foundSquare.close = i
@@ -218,12 +182,39 @@ function validParientes(str){
                     if(allChar[i] === curly.close){
                         foundCurly.close = i
                     }
-                    }
+                }
                 
                 
-    }
-    if
+            }
+            
   
         
 }
 validParientes("[]{}()")
+            
+function quickSort(lis){
+                if(lis.length <= 2){
+                    return lis
+                }else{
+                    let pivot = lis[0]
+                    let left = []
+                    let right = []
+            
+                    for(let i = 0; i < lis.length ; i++){
+                        if(i === pivot){
+                            continue
+                        }
+                        if(lis[i] < pivot){
+                            left.push(lis[i])
+                        }
+                        if(lis[i] > pivot){
+                            right.push(lis[i])
+                        }
+                    }
+                    return [...quickSort(left),...quickSort(right)]
+            
+                }
+            
+}
+
+console.log(quickSort([3,4,5,1,2,3,2,]))
